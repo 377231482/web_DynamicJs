@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>游动的圆球</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            /* 设置背景颜色,线性渐变的背景颜色   从左往右 */
+            background-image: linear-gradient(45deg, #d91e18, #9a12b3);
+        }
+
+        .wrapper {
+            width: 150px;
+            height: 150px;
+            /* 设置半透明背景颜色,  rgb,取值范围[0,255]
+        a:透明度, 取值范围[0,1]
+         */
+            /* background-color: rgba(255, 255, 255, 0.3); */
+            /* 设置绝对定位,其默认的参照物是浏览器窗口 */
+            position: absolute;
+            left: calc(40% - 70px);
+            top: calc(50% - 70px);
+            /* 设置动画的名称,时间,速度,执行次数 */
+            animation-name: move;
+            animation-duration: 1s;
+            /* 动画慢速开始,慢速结束 */
+            animation-timing-function: ease-in-out;
+            /* 保持了动画的连贯性,可让动画保留在结束位置 */
+            animation-fill-mode: both;
+            /* 循环次数 */
+            animation-iteration-count: infinite;
+            /* 设置动画轮回播放,奇数正向,偶数反向 */
+            animation-direction: alternate;
+            z-index: 10;
+        }
+
+        @keyframes move {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(300px);
+            }
+        }
+
+        span {
+
+            /* 设置动画的名称,时间,速度,执行次数 */
+            animation-name: down;
+            animation-duration: 1s;
+            /* 动画慢速开始,慢速结束 */
+            /* animation-timing-function: ease-in-out */
+            animation-timing-function: linear;
+            /* 保持了动画的连贯性,可让动画保留在结束位置 */
+            animation-fill-mode: both;
+            /* 循环次数 */
+            animation-iteration-count: infinite;
+            /* 设置动画轮回播放,奇数正向,偶数反向 */
+            /* animation-direction: alternate; */
+        }
+
+        .first {
+            /* 转换元素特性,可以设置宽高 */
+            display: block;
+            width: 50px;
+            height: 50px;
+            background-color: #fff;
+            /* 设置边框圆角,正圆形 */
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 25px);
+            left: calc(50% - 25px);
+        }
+
+        @keyframes down {
+            0%,
+            50%,
+            100% {
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(-50px);
+            }
+            75% {
+                transform: translateY(50px);
+            }
+        }
+
+        .second {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(19, 228, 99, 0.747);
+            left: calc(50% - 20px);
+            top: calc(50% - 20px);
+            animation-delay: 0.05s;
+        }
+
+        .wrapper:nth-child(2) {
+            /*  */
+            animation-delay: 0.05s;
+            z-index: 8;
+        }
+
+        .third {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(10, 51, 231, 0.5);
+            left: calc(50% - 15px);
+            top: calc(50% - 15px);
+            animation-delay: 0.1s;
+        }
+
+        .wrapper:nth-child(3) {
+            animation-delay: 0.1s;
+            z-index: 6;
+        }
+
+        .fourth {
+            width: 20px;
+            height: 20px;
+            background-color: rgba(221, 15, 221, 0.795);
+            left: calc(50% - 10px);
+            top: calc(50% - 10px);
+            animation-delay: 0.15s;
+        }
+
+        .wrapper:nth-child(4) {
+            animation-delay: 0.15s;
+            z-index: 4;
+        }
+
+        .fifth {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(229, 233, 8, 0.795);
+            left: calc(50% - 5px);
+            top: calc(50% - 5px);
+            animation-delay: 0.18s;
+        }
+
+        .wrapper:nth-child(5) {
+            animation-delay: 0.18s;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- wrapper : 容器 -->
+    <div class="wrapper">
+        <span class="first"></span>
+    </div>
+    <div class="wrapper">
+        <span class="first second"></span>
+    </div>
+    <div class="wrapper">
+        <span class="first third"></span>
+    </div>
+    <div class="wrapper">
+        <span class="first fourth"></span>
+    </div>
+    <div class="wrapper">
+        <span class="first fifth"></span>
+    </div>
+</body>
+
+</html>

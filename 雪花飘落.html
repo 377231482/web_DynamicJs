@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=613647889,3992000746&fm=27&gp=0.jpg">
+
+    <title>雪花飘飘</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: black;
+            height: 100vh;
+            overflow: hidden;
+
+        }
+
+        img {
+            position: absolute;
+            /* transform: scale(0.5); */
+            /* animation-name: zhuan;
+            animation-duration: 2s; */
+            animation-iteration-count: infinite;
+            animation-timing-function: linear
+        }
+
+        /* @keyframes zhuan {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- 1,雪花的大小不一致,即,随机大小
+         2,下落轨迹是斜向下的,即改变坐标值 ----  定位
+         3,循环下降的
+         4,雪花位置是随机的
+    -->
+    <!-- <img src="flake.png" alt=""> -->
+</body>
+<script>
+
+    function show() {
+        //通过文档创建img标签
+        var imgBox = document.createElement('img');
+        //设置标签属性src
+        imgBox.src = 'flake.png';
+        //在文档的body中追加子元素
+        document.body.appendChild(imgBox);
+        // 1,随机位置出现雪花
+
+        //获取浏览器的宽度高度
+        var liuWidth = document.documentElement.clientWidth;
+        var liuHeight = document.documentElement.clientHeight;
+        //Math.rondom() 获取[0,1)的随机小数
+        //Math.rondom() * n 获取[0,n)的随机小数
+        var left = Math.random() * liuWidth;
+        // alert(left);
+        var up = Math.random() * liuHeight;
+        // alert(top);
+        var num = Math.random() * 0.45;
+
+        imgBox.style.left = left + 'px';
+        imgBox.style.up = up + 'px';
+
+        imgBox.style.transform = 'scale(' + num + ')';
+
+        // 给标签添加类名
+        // imgBox.className = 'demo';
+
+        //一片雪花的降落轨迹   每隔多久斜向下挪动一次
+        function jiang() {
+            left = left + 10;
+            up = up + 5;
+
+            //如果平移距离超出浏览器窗口,从浏览器左上继续开始
+            if (left > liuWidth) {
+                left = -100;
+            }
+            if (up > liuHeight) {
+                up = -100;
+            }
+            imgBox.style.left = left + 'px';
+            imgBox.style.top = up + 'px';
+        }
+
+        // jiang();
+        setInterval(jiang, 100);
+
+    }
+    var i = 0;
+    for (; i < 100;) {
+        show();
+        i++;
+
+
+    }
+
+
+
+</script>
+
+</html>

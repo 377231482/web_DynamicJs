@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>打字游戏</title>
+    <style>
+        body{
+            margin:0;
+            /* 径向渐变色，默认是椭圆 */
+            background-image:radial-gradient(circle, #999,#000,#000);
+            height:100vh;
+            color:#fff;
+            /* 文本对齐方式：居中 */
+            text-align: center;
+            /* 设置文字类型 */
+            font-family: '微软雅黑';
+        }
+        #zimu{
+            font-size:260px;
+            /* 向上的内边距 */
+            padding-top:120px;
+            color:lightseagreen;
+            /* 文本阴影：X轴 Y轴 阴影模糊度  颜色 */
+            text-shadow: 3px 3px 1px #000 ;
+        }
+        /* 由小变大的动画 */
+        @keyframes zoomIn {
+            0%{
+                transform:scale(0);
+            }
+            100%{
+                transform:scale(1);
+            }
+        }
+        .right{
+            animation-name:zoomIn;
+            animation-duration:0.5s;
+            animation-fill-mode:both;
+        }
+        @keyframes shake {
+            0%, 100%{
+                transform:translateX(0);
+            }
+            20%, 60%{
+                transform:translateX(-10px);
+            }
+            40%, 80%{
+                transform:translateX(10px);
+            }
+        }
+        /*
+        当动画数量过多时，动画的名称与设置该动画的类名是保持一致的
+
+        */
+        .wrong{
+            animation-name:shake;
+            animation-duration:0.3s;
+            animation-fill-mode:both;
+            color:yellow !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="zimu" class="">
+        M
+    </div>
+    <p id="result">
+        请在键盘上按下屏幕显示的字母
+    </p>
+
+<!--
+    1.刷新页面时，显示新字母
+    2.当输入正确字母时，显示新字母（字母由小变大显示）
+        统计正确与错误个数，计算正确率
+    3.当输入错误字母时，字母颜色发生改变(字母左右抖动)
+        统计正确与错误个数，计算正确率
+
+-->
+</body>
+<script>
+    // 获取页面中所需要的标签
+    var divBox = document.getElementById('zimu');
+    var pBox = document.getElementById('result');
+    // 设置正确、错误的初始值
+    var ok = 0;
+    var error = 0;
+
+    // function 声明/创建一个函数(方法，功能)，封装一部分可重用的代码
+    // 封装过的代码，自身并不会自动运行
+    function show(){
+        // 显示新字母  ，计数从0开始
+        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Math.random() 取[0,1)之间的随机小数
+        var num = Math.random() * 26;
+        // Math.floor( 10.9 ) = 10
+        // 向下取整(向下取最近的整数)
+        num = Math.floor(num);
+//    alert(num);
+
+        // 数字范围[0,25] 取整数
+//    alert( chars[num] );
+
+        // 改变标签的内容
+        divBox.innerHTML = chars[num];
+
+    }
+
+    // name() :运行function name中的代码
+    show();
+
+    // 当按下按键时，执行function中的代码
+    window.onkeydown = function(event){
+        // alert('按下键了');
+        // event:当前的行为本身
+//        console.log(event);
+        // 获取按下的键
+        var key = event.key;
+        // 将小写字母转换成大写字母
+        key = key.toUpperCase();
+
+//        alert(key);
+        // 获取标签的内容，存储到变量char中
+        var char = divBox.innerHTML;
+
+        // 判断字母是否相等  == 等于的意思
+        if( key == char ){
+            ok = ok + 1;
+            // 增加类名，即增加正确的动画
+            divBox.className = 'right';
+
+            // 延迟500ms之后，运行function中的代码
+            setTimeout(function(){
+                divBox.className = '';
+            }, 500)
+
+            // 显示新字母
+            show();
+
+        } else {
+            error = error + 1;
+            divBox.className = 'wrong';
+            setTimeout(function(){
+                divBox.className = '';
+            }, 300)
+
+        }
+
+        // 计算正确率  = 正确个数 / 正确 + 错误
+        function calc(){
+            if( ok + error > 0 ){
+                // 百分比
+                var result = ok / ( ok + error ) * 100;
+                // toFixed(n) 保留n个小数点
+                result = result.toFixed(2);
+                pBox.innerHTML = '正确个数:' + ok + '，错误个数:' + error +  '，正确率是:' + result + '%';
+            }
+        }
+        calc();
+
+    }
+
+</script>
+</html>

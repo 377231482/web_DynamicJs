@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>字母大战</title>
+    <style>
+        body{
+            margin:0;
+            overflow: hidden;
+            height:100vh;
+            font-family:'微软雅黑';
+
+        }
+        span{
+            position: absolute;
+            width:30px;
+            height:30px;
+            background-color:red;
+            border-radius:50%;
+            line-height: 30px;
+            text-align: center;
+            color:#fff;
+            font-size:20px;
+        }
+        .move{
+            animation-name:move;
+            animation-duration:0.1s;
+            animation-fill-mode:both;
+
+        }
+        @keyframes move {
+            0%{
+                transform:scale(1);
+                /* 设置标签透明度 */
+                opacity:1;
+            }
+            50%{
+                transform:scale(1.5);
+                opacity:0.5;
+            }
+            100%{
+                transform:scale(2);
+                opacity:0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--<span> A </span>-->
+</body>
+<script>
+    // 获取浏览器的宽高
+    var liuWidth = document.documentElement.clientWidth - 30;
+    var liuHeight = document.documentElement.clientHeight;
+    var count = 0;
+    // 通过标签名称获取所有的标签，计数从0开始
+    // spanTags[0]： 第一个span
+    var spanTags = document.getElementsByTagName('span');
+
+    // 显示一个降落轨迹的文字
+    function show(){
+        // 创建标签
+        var spanBox = document.createElement('span');
+        // 将标签追加至body中
+        document.body.appendChild(spanBox);
+
+        var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        var num = Math.floor( Math.random() * 26 );
+        var char = chars[num];
+        spanBox.innerHTML = char;
+
+        var left = Math.random() * liuWidth ;
+//        var up = Math.random() * liuHeight ;
+
+        spanBox.style.left = left + 'px';
+//        spanBox.style.top = up + 'px';
+        var up = -10
+        function down(){
+            up = up + 5;
+            spanBox.style.top = up + 'px';
+        }
+        // 每隔100ms执行function down的代码
+        setInterval(down, 100);
+    }
+//    console.log(liuHeight)
+
+    show();
+
+
+    var timer = setInterval(function(){
+        show();
+        
+//        console.log( spanTags.length );
+//        if( spanTags.length > 100 ){
+//            clearInterval(timer);
+//        }
+//
+        // length:span的总个数
+        for( var i = 0; i < spanTags.length; i++ ){
+            // top:100px;  比较的数字
+            // replace()：将100px替换数字100
+            if( spanTags[i].style.top.replace('px','') > liuHeight ){
+                alert('游戏结束,小主,你击碎的字母球球数量为:'+count);
+                // 终止循环
+                clearInterval(timer);
+                return;
+                  
+            }
+            
+        }
+       
+
+    }, 500);
+
+    window.onkeydown = function(event){
+        var key = event.key.toUpperCase();
+        // for()获取每个span标签:  spanTags[i]
+        for( var i = 0; i < spanTags.length; i++ ){
+
+            if( key == spanTags[i].innerHTML ){
+//                console.log( spanTags[i].innerHTML );
+                  count++;
+//                alert('内容相同');
+                spanTags[i].className = 'move';
+                setTimeout(function(){
+                    document.body.removeChild(spanTags[i]);
+                },100)
+                return;
+            }
+        }
+
+    }
+
+
+</script>
+</html>

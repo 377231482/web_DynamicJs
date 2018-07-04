@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>旋转风车</title>
+    <style>
+        body {
+            /* 处理内容溢出,裁剪多余内容,滚动条消失 */
+            overflow: hidden;
+            /* 开启弹性布局:控制内部子元素的位置布局 */
+            display: flex;
+            /* 设置水平方向的对齐方式 */
+            justify-content: center;
+            /* 弹性结束的位置,设置竖直方向的对齐方式 */
+            align-items: flex-end;
+            /* vh:view height 视图窗口;类似百分比 */
+            height: 100vh;
+            /* 具备有默认8px外边距,margin:外边距 */
+            margin: 0;
+
+        }
+
+        /* 浏览器中,所有的标签默认都没有高度 */
+
+        main {
+            background-image: url(images/caodi.png);
+            background-size: contain;
+            height: 500px;
+            width: 1300px;
+            min-width: 1300px;
+            /* 设置相对定位,即,设置嵌套绝对定位元素的参照物 */
+            position: relative;
+            /* 设置最小宽度 */
+            background-repeat: no-repeat;
+        }
+        .img1{
+            width: 360px;
+            height: 360px;
+            /* 设置绝对定位,挪动位置,通过left,right,top,bottom移动 */
+            position: absolute;
+            left: 262px;
+            top: 20px     
+            
+               }
+        .img2{
+            width: 200px;
+            height: 180px;
+            position: absolute;
+            left: 566px;
+            top:258px;
+        }
+        .img3{
+            width: 260px;
+            height: 230px;
+            position: absolute;
+            left: 724px;
+            top:185px;
+        }
+        /* 动画制作分两步,1,设置动画的相关属性:名称,时间等 */
+       img{
+           /* 设置动画名称 */
+           animation-name:zhuan;
+           /* 设置动画时间 */
+           animation-duration: 2s;
+           /* 设置动画的执行次数:循环/无穷尽,也可以是数字 */
+           animation-iteration-count: infinite;
+           /* 设置动画的执行速度:匀速 */
+           animation-timing-function: linear;
+
+       }
+       /* :hover  设置鼠标悬停效果,即鼠标在标签之上是的效果 */
+       img:hover{
+           animation-duration: 0.8s;
+       }
+       img:active{
+           animation-duration: 0s;
+       }
+       /*2,设置动画具体的执行过程,默认动画执行次数是1 动画从0度转到360度*/
+       @keyframes zhuan{
+           from{
+              transform:rotate(0);
+           }
+           to{
+              transform: rotate(360deg);
+           }
+       }
+    </style>
+</head>
+
+<body>
+    <main>
+        <!-- main:重要内容的容器标签 -->
+     <img class="img1" src="images/fengche.png" alt="">
+     <img class="img2" src="images/fengche.png" alt="">
+     <img class="img3" src="images/fengche.png" alt="">
+    </main>
+</body>
+
+</html>

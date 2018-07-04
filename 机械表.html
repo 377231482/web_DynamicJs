@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="http://c.hiphotos.baidu.com/baike/s%3D220/sign=0d92e2000a46f21fcd345951c6256b31/d1a20cf431adcbefac51d2fdacaf2edda2cc9fe0.jpg">
+    <title>机械表-劳力士</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            width: 650px;
+            height: 650px;
+            background-image: url(clock.jpg);
+            position: relative;
+
+        }
+
+        #center {
+            height: 14px;
+            width: 14px;
+            border-radius: 7px;
+            background-color: orangered;
+            position: absolute;
+            top: 317px;
+            left: 318px;
+
+        }
+
+        #hour {
+            width: 450px;
+            height: 10px;
+            /* background-color: red; */
+            position: absolute;
+            top: calc(50% - 5px);
+            left: calc(50% - 225px);
+            animation-name: zhuanzhuanzhuan;
+            animation-duration: 43200s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-delay: -10800s;
+        }
+
+        #hour span {
+            display: block;
+            height: 10px;
+            width: 220px;
+            background-color: red;
+            margin-left: 50px;
+            border-radius: 5px;
+
+        }
+
+        @keyframes zhuanzhuanzhuan {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #minute {
+            width: 450px;
+            height: 6px;
+            /* background-color: red; */
+            position: absolute;
+            top: calc(50% - 3px);
+            left: calc(50% - 225px);
+            animation-name: zhuanzhuan;
+            animation-duration: 3600s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            transform-style: -900s;
+        }
+
+        #minute span {
+            display: block;
+            height: 6px;
+            width: 220px;
+            background-color: blue;
+            /* margin-top: 2px; */
+            margin-left: 40px;
+            border-radius: 3px;
+        }
+
+        @keyframes zhuanzhuan {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #second {
+            width: 450px;
+            height: 4px;
+            /* background-color: red; */
+            position: absolute;
+            top: calc(50% - 2px);
+            left: calc(50% - 225px);
+            animation-name: zhuan;
+            animation-duration: 60s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            /* 动画已执行15s */
+            animation-delay: -15s;
+
+        }
+
+        #second span {
+            display: block;
+            height: 4px;
+            width: 220px;
+            background-color: rgb(243, 10, 165);
+            /* margin-top: 2px; */
+            margin-left: 30px;
+            border-radius: 2px;
+        }
+
+        @keyframes zhuan {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div id="hour">
+            <span></span>
+        </div>
+        <div id="minute">
+            <span></span>
+        </div>
+        <div id="second">
+            <span></span>
+        </div>
+        <div id="center">
+
+        </div>
+    </main>
+</body>
+<script>
+//   setInterval(function(){
+    var xiaoshi = document.getElementById('hour');
+    var fenzhong = document.getElementById('minute');
+    var miaomiao = document.getElementById('second')
+
+
+    var date = new Date();
+
+    var second = date.getSeconds();
+    var minute = date.getMinutes();
+    var hour = date.getHours();
+    var secDeg = -15 - second;
+ 
+
+    
+    var minDeg = -15 * 60 - minute * 60;
+    var hourDeg = -3 * 60 * 60 - hour * 60 * 60 - minute * 60;
+
+    
+    hour = hour - 12;
+    miaomiao.style.animationDelay = secDeg + 's';
+    
+    fenzhong.style.animationDelay = minDeg + 's';
+    
+    xiaoshi.style.animationDelay = hourDeg + 's';
+
+
+//   },000)
+
+</script>
+
+</html>

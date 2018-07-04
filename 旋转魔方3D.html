@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>旋转魔方3D版</title>
+    <style>
+        body {
+            margin: 0;
+            background-image: url(img.jpg);
+            background-repeat: no-repeat;
+            /* 设置背景图片大小,宽度  高度 */
+            background-size: 100% 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 视角与3D元素之间的距离 */
+            perspective: 1000px;
+            /* 改变视角的位置 默认值50% 50% */
+            perspective-origin: 50% 50%;
+        }
+
+        main {
+            width: 200px;
+            height: 200px;
+            /* background-color: rgba(255, 0, 13, 0.3); */
+            /* 保留内部子元素的3D转换效果 */
+            transform-style: preserve-3d;
+            animation-name: zhuan;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes zhuan {
+            0% {
+                transform: rotateX(0) rotateY(0);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        main>div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            /* 设置不同样式切换时所需的过度时间 */
+            transition-duration: 1s;
+
+
+        }
+
+        section {
+            width: 50%;
+            height: 50%;
+            position: absolute;
+            left: 25%;
+            top: 25%;
+            transform-style: preserve-3d;
+        }
+
+        section>div {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+
+        }
+
+        .qianqian {
+
+            background-image: url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2479635269,2019566811&fm=27&gp=0.jpg);
+            background-size: 100px;
+            transform: rotateY(180deg) translateZ(50px);
+        }
+
+        .houhou {
+            background-image: url(https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1349926025,3522743385&fm=11&gp=0.jpg );
+            background-size: 100px;
+            transform: translateZ(50px);
+        }
+
+        .shangshang {
+            background-image: url(https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2643149763,204113986&fm=27&gp=0.jpg);
+            background-size: 100px;
+            transform: rotateX(90deg) translateZ(50px);
+        }
+
+        .xiaxia {
+            background-image: url(https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=895722383,2608927748&fm=27&gp=0.jpg);
+            background-size: 100px;
+            transform: rotateX(-90deg) translateZ(50px);
+        }
+
+        .zuozuo {
+            background-image: url(https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1296393177,1632086145&fm=27&gp=0.jpg);
+            background-size: 100px;
+            transform: rotateY(-90deg) translateZ(50px);
+        }
+
+        .youyou {
+            background-image: url(https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2567295520,1400371967&fm=27&gp=0.jpg);
+            background-size: 100px;
+            transform: rotateY(90deg) translateZ(50px);
+        }
+
+        .qian {
+            background-color: rgba(0, 153, 255, 0.616);
+            transform: rotateY(180deg) translateZ(100px);
+
+        }
+
+        .hou {
+            background-color: rgba(229, 255, 0, 0.774);
+            /* 3d 图形转换   沿z轴  平移 */
+            transform: translateZ(100px);
+        }
+
+        .shang {
+            background-color: rgba(255, 0, 179, 0.616);
+            transform: rotateX(90deg) translateZ(100px);
+
+        }
+
+        .xia {
+            background-color: rgba(40, 189, 47, 0.616);
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        .zuo {
+            background-color: rgba(3, 13, 20, 0.616);
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+
+        .you {
+            background-color: rgba(13, 15, 156, 0.616);
+            transform: rotateY(90deg) translateZ(100px);
+        }
+
+        /* :hover  设置鼠标悬停效果,即鼠标在标签之上时,样式发生变化 */
+
+        main:hover .hou {
+            transform: translateZ(250px);
+        }
+
+        main:hover .qian {
+            transform: rotateY(180deg) translateZ(250px);
+        }
+
+        main:hover .shang {
+            transform: rotateX(90deg) translateZ(250px);
+        }
+
+        main:hover .xia {
+            transform: rotateX(-90deg) translateZ(250px);
+        }
+
+        main:hover .you {
+            transform: rotateY(90deg) translateZ(250px);
+        }
+
+        main:hover .zuo {
+            transform: rotateY(-90deg) translateZ(250px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- main 是立方体的容器标签 -->
+    <main>
+        <div class="qian"></div>
+        <div class="hou"></div>
+        <div class="shang"></div>
+        <div class="xia"></div>
+        <div class="zuo"></div>
+        <div class="you"></div>
+        <section>
+            <div class="qianqian"></div>
+            <div class="houhou"></div>
+            <div class="shangshang"></div>
+            <div class="xiaxia"></div>
+            <div class="zuozuo"></div>
+            <div class="youyou"></div>
+        </section>
+    </main>
+</body>
+
+</html>

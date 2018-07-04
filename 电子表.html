@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>北京时间</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            /* height: 100vh; */
+            text-align: center;
+            font-family: 'Digital Dismay';
+
+            /* display: flex;
+            justify-content: center;
+            align-items: center; */
+        }
+
+        div {
+            color: yellow;
+            font-size: 180px;
+            margin-top: 180px;
+
+        }
+
+        p {
+            color: white;
+            font-size: 30px;
+            /* position: absolute; */
+            /* margin-left: 150px; */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 在不刷新页面的前提下,需要每隔1s改变一次标签的内容 -->
+    <div id="time">
+        09:30:30
+    </div>
+    <p id="riqi">
+        2018年7月2日 星期二
+    </p>
+</body>
+<!-- script:标签内部编写js:javascript 编码 -->
+<script>
+    // setInterval(function,   time)11
+    // 每隔time毫秒之后,运行function中的代码
+    setInterval(function () {
+        // 从文档中,根据id值获取标签
+        //= :复制的意思
+        //var: 声明变量,类似于设置未知数,作用: 存储数据
+        var divId = document.getElementById('time');
+        var pId = document.getElementById('riqi');
+        //改变标签的内部内容
+        // divId.innerHTML = '这是改变好的新内容';
+
+        //new Date() :获取最新日期
+        var date = new Date();
+        //alert() 在浏览器中显示弹出框
+        // alert(date.getHours());
+        //通过日期获取小时,分钟,秒钟
+        var hour = date.getHours();
+        var minute = date.getMinutes();`
+        var second = date.getSeconds();
+        
+        // alert(minute);
+        // if(条件){
+        //     条件为真时,运行内部代码
+        // }else{
+        //    条件为假时,运行内部代码
+        // }
+        if (hour < 10) {
+            // + : 连接符的作用
+            hour = '0' + hour
+        }
+        if (minute < 10) {
+            minute = '0' + minute;
+        }
+        if (second < 10) {
+            second = '0' + second;
+        }
+        divId.innerHTML = hour + ":" + minute + ":" + second;
+
+        // 从日期中获取年月日
+        var year = date.getFullYear();
+        //getMonth()获取的是0,1,2,3.....11
+        //这12 个数字,即计数从0开始
+        var month = date.getMonth() + 1;
+        var tian = date.getDate();
+        // alert(tian);
+        // alert(year);
+        //getDay()  获取到的是0,1,2,3,4,5,6
+        var day = date.getDay();
+        // alert(day);
+
+        switch (day) {
+            case 1:
+                day = '星期一';
+
+            // break;
+            case 2:
+                day = '星期二';
+                break;
+            case 3:
+                day = '星期三';
+                break;
+            case 4:
+                day = '星期四';
+                break;
+            case 5:
+                day = '星期五';
+                break;
+            case 6:
+                day = '星期六';
+                break;
+            case 0:
+                day = '星期日';
+                break;
+        }
+        pId.innerHTML = year + "年" + month + "月" + tian + "日" + day;
+    }, 1000)
+
+</script>
+getHours()获取当前小时
+getMinutes()获取当前分钟
+getSeconds()获取当前秒数
+获取最新日期
+var date = new Date();
+getFullYear()获取当前年份
+getMonth()获取当前月份
+getDate()获取当前日期
+getDay()获取当前日期 0,1,2,3,4,5,6
+
+</html>
